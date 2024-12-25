@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanita OpenGL Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .function {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .function h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        .parameters {
+            margin-left: 20px;
+        }
+        .parameter {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kanita's OpenGL Project &copy;</h1>
+    
+    <section>
+        <h2>Overview</h2>
+        <p>
+            Created an OpenGL-based 3D graphics application that renders geometric shapes with dynamic lighting.
+            The application features interactive camera controls, material properties, and lighting effects.
+        </p>
+    </section>
+
+    <section>
+        <h2>Controls Guide</h2>
+        <div class="function">
+            <h3>Keyboard Controls</h3>
+            <ul>
+                <li><code>W</code> - Move camera forward</li>
+                <li><code>S</code> - Move camera backward</li>
+                <li><code>A</code> - Strafe camera left</li>
+                <li><code>D</code> - Strafe camera right</li>
+                <li><code>ESC</code> - Exit application</li>
+            </ul>
+            
+            <h3>Mouse Controls</h3>
+            <ul>
+                <li><strong>Mouse Movement</strong> - Look around (rotates camera)</li>
+                <li>Pitch is limited to prevent camera flipping</li>
+                <li>Minimum camera height is enforced to maintain perspective</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Technical Implementation</h2>
+        <div class="function">
+            <h3>Graphics Pipeline</h3>
+            <p>The application uses OpenGL's fixed-function pipeline with the following features:</p>
+            <ul>
+                <li>Perspective projection for 3D rendering</li>
+                <li>Depth testing for proper 3D object occlusion</li>
+                <li>Smooth shading for better lighting transitions</li>
+                <li>Double buffering for smooth animation</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Camera System</h3>
+            <p>Implements a first-person camera with:</p>
+            <ul>
+                <li>Position vector (x, y, z) for camera location</li>
+                <li>Front vector for camera direction</li>
+                <li>Up vector for camera orientation</li>
+                <li>Yaw and pitch angles for rotation</li>
+                <li>Constrained pitch (-20° max) to prevent disorientation</li>
+                <li>Minimum height limit (2.0 units) above platform</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Material System</h3>
+            <p>Each object has customizable material properties:</p>
+            <ul>
+                <li>Ambient color for base visibility</li>
+                <li>Diffuse color for main object color</li>
+                <li>Specular color for highlights</li>
+                <li>Shininess for specular highlight size</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Scene Objects</h2>
+        <div class="function">
+            <h3>Cube Properties</h3>
+            <p>The cube features:</p>
+            <ul>
+                <li>Six uniquely colored faces:
+                    <ul>
+                        <li>Front: Blue</li>
+                        <li>Back: Green</li>
+                        <li>Top: Yellow</li>
+                        <li>Bottom: Red</li>
+                        <li>Right: Purple</li>
+                        <li>Left: Orange</li>
+                    </ul>
+                </li>
+                <li>Per-face material properties</li>
+                <li>Proper normal vectors for lighting</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Pyramid Properties</h3>
+            <p>The pyramid features:</p>
+            <ul>
+                <li>Triangular faces with distinct colors</li>
+                <li>Square base aligned with the platform</li>
+                <li>Calculated normal vectors for proper lighting</li>
+                <li>Material properties for realistic appearance</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Platform Properties</h3>
+            <p>The ground platform features:</p>
+            <ul>
+                <li>Grid-like surface pattern</li>
+                <li>Neutral color scheme</li>
+                <li>Serves as a reference point for navigation</li>
+                <li>Helps establish scene depth and scale</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Lighting Details</h2>
+        <div class="function">
+            <h3>Light Source</h3>
+            <p>The scene uses a single light source with:</p>
+            <ul>
+                <li>Position: Above and slightly in front of the scene</li>
+                <li>White light color for natural illumination</li>
+                <li>Components:
+                    <ul>
+                        <li>Ambient: 0.1 intensity for base lighting</li>
+                        <li>Diffuse: 1.0 intensity for main lighting</li>
+                        <li>Specular: 1.0 intensity for highlights</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Lighting Effects</h3>
+            <p>The lighting system creates:</p>
+            <ul>
+                <li>Strong contrast between lit and unlit surfaces</li>
+                <li>Soft specular highlights on objects</li>
+                <li>Darkened surfaces facing away from light</li>
+                <li>Ambient light to prevent complete darkness</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Core Functions</h2>
+
+        <div class="function">
+            <h3>main()</h3>
+            <p>The entry point of the application. Initializes GLFW, creates the window, and starts the main rendering loop.</p>
+        </div>
+
+        <div class="function">
+            <h3>initGL()</h3>
+            <p>Initializes OpenGL settings including:</p>
+            <ul>
+                <li>Depth testing</li>
+                <li>Lighting</li>
+                <li>Background color</li>
+                <li>Light properties</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>drawCube(float x, float y, float z)</h3>
+            <p>Draws a colored cube at the specified position with material properties and lighting effects.</p>
+            <div class="parameters">
+                <p><span class="parameter">x:</span> X-coordinate position</p>
+                <p><span class="parameter">y:</span> Y-coordinate position</p>
+                <p><span class="parameter">z:</span> Z-coordinate position</p>
+            </div>
+            <p>Features:</p>
+            <ul>
+                <li>Six uniquely colored faces</li>
+                <li>Material properties for ambient and diffuse lighting</li>
+                <li>Specular highlights</li>
+                <li>Normal vectors for proper lighting calculations</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>drawPyramid(float x, float y, float z)</h3>
+            <p>Draws a colored pyramid at the specified position with material properties.</p>
+            <div class="parameters">
+                <p><span class="parameter">x:</span> X-coordinate position</p>
+                <p><span class="parameter">y:</span> Y-coordinate position</p>
+                <p><span class="parameter">z:</span> Z-coordinate position</p>
+            </div>
+            <p>Features:</p>
+            <ul>
+                <li>Triangular faces with different colors</li>
+                <li>Material properties for lighting</li>
+                <li>Proper normal vectors for each face</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>drawPlatform()</h3>
+            <p>Draws the ground platform that serves as the base for all objects.</p>
+            <p>Features:</p>
+            <ul>
+                <li>Grid-like pattern</li>
+                <li>Material properties for consistent lighting</li>
+                <li>Serves as a reference point for object placement</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>processInput(GLFWwindow* window)</h3>
+            <p>Handles keyboard input for camera and scene control.</p>
+            <div class="parameters">
+                <p><span class="parameter">window:</span> Pointer to the GLFW window</p>
+            </div>
+            <p>Controls:</p>
+            <ul>
+                <li>W/S: Move camera forward/backward</li>
+                <li>A/D: Move camera left/right</li>
+                <li>Mouse: Look around</li>
+                <li>ESC: Close application</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>mouse_callback(GLFWwindow* window, double xpos, double ypos)</h3>
+            <p>Handles mouse movement for camera rotation.</p>
+            <div class="parameters">
+                <p><span class="parameter">window:</span> Pointer to the GLFW window</p>
+                <p><span class="parameter">xpos:</span> Mouse X position</p>
+                <p><span class="parameter">ypos:</span> Mouse Y position</p>
+            </div>
+            <p>Features:</p>
+            <ul>
+                <li>Smooth camera rotation</li>
+                <li>Pitch constraints to prevent camera flipping</li>
+                <li>Height constraints to maintain perspective</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Camera Properties</h2>
+        <div class="function">
+            <h3>Camera Variables</h3>
+            <p>Global variables that control camera behavior:</p>
+            <ul>
+                <li><code>cameraPos</code>: Current camera position</li>
+                <li><code>cameraFront</code>: Camera's forward direction</li>
+                <li><code>cameraUp</code>: Camera's up vector</li>
+                <li><code>yaw</code>: Horizontal rotation angle</li>
+                <li><code>pitch</code>: Vertical rotation angle</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Lighting System</h2>
+        <div class="function">
+            <h3>Lighting Properties</h3>
+            <p>The application uses OpenGL's fixed-function lighting pipeline with:</p>
+            <ul>
+                <li>Ambient light for base illumination</li>
+                <li>Diffuse light for directional lighting</li>
+                <li>Specular highlights for shininess</li>
+                <li>Material properties for object appearance</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Mathematics in the Implementation</h2>
+        
+        <div class="function">
+            <h3>Spherical Coordinates for Camera</h3>
+            <p>The camera position is calculated using spherical coordinates converted to Cartesian coordinates:</p>
+            <pre><code>
+float yawRad = yaw * M_PI / 180.0f;
+float pitchRad = pitch * M_PI / 180.0f;
+
+float camX = cameraRadius * cos(pitchRad) * cos(yawRad);
+float camY = cameraRadius * sin(pitchRad) + cameraHeight;
+float camZ = cameraRadius * cos(pitchRad) * sin(yawRad);
+            </code></pre>
+            <p>Mathematical explanation:</p>
+            <ul>
+                <li>Yaw (φ) represents rotation around Y-axis (0° to 360°)</li>
+                <li>Pitch (θ) represents elevation (-20° to 89°)</li>
+                <li>Radius (r) is the distance from center (2.0 to 10.0)</li>
+                <li>Conversion formulas:
+                    <ul>
+                        <li>x = r * cos(θ) * cos(φ)</li>
+                        <li>y = r * sin(θ) + height</li>
+                        <li>z = r * cos(θ) * sin(φ)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Perspective Projection Matrix</h3>
+            <p>Custom perspective projection implementation:</p>
+            <pre><code>
+void applyPerspective(float fov, float aspect, float near, float far) {
+    float top = near * tan(fov * 0.5f * M_PI / 180.0f);
+    float right = top * aspect;
+
+    float matrix[16] = {
+        (2.0f * near) / (right * 2), 0.0f, 0.0f, 0.0f,
+        0.0f, (2.0f * near) / (top * 2), 0.0f, 0.0f,
+        0.0f, 0.0f, -(far + near) / (far - near), -1.0f,
+        0.0f, 0.0f, -(2.0f * far * near) / (far - near), 0.0f
+    };
+}
+            </code></pre>
+            <p>Mathematical concepts:</p>
+            <ul>
+                <li>Field of View (FOV) determines view angle (45° in this implementation)</li>
+                <li>Aspect ratio maintains proper screen proportions</li>
+                <li>Near and far planes define viewing frustum</li>
+                <li>Matrix elements:
+                    <ul>
+                        <li>m[0][0] = 2n/(r-l): X scale</li>
+                        <li>m[1][1] = 2n/(t-b): Y scale</li>
+                        <li>m[2][2] = -(f+n)/(f-n): Z scale</li>
+                        <li>m[2][3] = -1: Perspective divide</li>
+                        <li>m[3][2] = -2fn/(f-n): Z translation</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Look-At Matrix Calculation</h3>
+            <p>Custom implementation of gluLookAt matrix:</p>
+            <pre><code>
+void applyLookAt(float eyeX, float eyeY, float eyeZ,
+                 float centerX, float centerY, float centerZ,
+                 float upX, float upY, float upZ) {
+    float forward[3] = {
+        centerX - eyeX,
+        centerY - eyeY,
+        centerZ - eyeZ
+    };
+    normalize(forward);
+
+    float side[3] = {
+        forward[1] * upZ - forward[2] * upY,
+        forward[2] * upX - forward[0] * upZ,
+        forward[0] * upY - forward[1] * upX
+    };
+    normalize(side);
+
+    float up[3] = {
+        side[1] * forward[2] - side[2] * forward[1],
+        side[2] * forward[0] - side[0] * forward[2],
+        side[0] * forward[1] - side[1] * forward[0]
+    };
+}
+            </code></pre>
+            <p>Mathematical concepts:</p>
+            <ul>
+                <li>View matrix construction using three orthogonal vectors:
+                    <ul>
+                        <li>Forward vector (F): Target - Eye position</li>
+                        <li>Side vector (S): F × Up (cross product)</li>
+                        <li>New Up vector (U): S × F (cross product)</li>
+                    </ul>
+                </li>
+                <li>Vector normalization: v = v/|v|</li>
+                <li>Cross product for perpendicular vectors</li>
+                </li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Normal Vector Calculations</h3>
+            <p>Normal vectors for lighting calculations:</p>
+            <pre><code>
+glNormal3f(0.0f, 0.0f, 1.0f);
+glNormal3f(0.0f, 0.5f, 0.5f);
+            </code></pre>
+            <p>Mathematical concepts:</p>
+            <ul>
+                <li>Normal vectors must be normalized (length = 1)</li>
+                <li>Direction determines how light reflects off surface</li>
+                <li>For flat surfaces: perpendicular to face</li>
+                <li>For angled surfaces (pyramid): normalized average of face direction</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Mouse Movement Calculations</h3>
+            <p>Converting mouse movement to rotation angles:</p>
+            <pre><code>
+float xoffset = xpos - lastX;
+float yoffset = lastY - ypos;
+    
+float sensitivity = 0.1f;
+xoffset *= sensitivity;
+yoffset *= sensitivity;
+
+yaw += xoffset;
+pitch = glm::clamp(pitch + yoffset, -20.0f, 89.0f);
+            </code></pre>
+            <p>Mathematical concepts:</p>
+            <ul>
+                <li>Delta calculation: current - previous position</li>
+                <li>Sensitivity scaling for smooth movement</li>
+                <li>Angle clamping:
+                    <ul>
+                        <li>Pitch: limited to [-20°, 89°]</li>
+                        <li>Yaw: full 360° rotation</li>
+                    </ul>
+                </li>
+                <li>Prevents gimbal lock by restricting pitch</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Code Explanation</h2>
+        
+        <div class="function">
+            <h3>Camera System</h3>
+            <p>The camera system uses spherical coordinates for smooth orbital movement:</p>
+            <pre><code>
+float cameraRadius = 5.0f;
+float cameraHeight = 2.5f;
+float cameraAngle = 45.0f;
+float yaw = -90.0f;
+float pitch = 0.0f;
+
+float camX = cameraRadius * cos(pitchRad) * cos(yawRad);
+float camY = cameraRadius * sin(pitchRad) + cameraHeight;
+float camZ = cameraRadius * cos(pitchRad) * sin(yawRad);
+            </code></pre>
+            <p>Features:</p>
+            <ul>
+                <li>Orbital camera with adjustable radius (2.0f to 10.0f)</li>
+                <li>Height constraints (minimum 2.0f)</li>
+                <li>Pitch limited to prevent flipping (-20° to 89°)</li>
+                <li>Smooth mouse control with sensitivity scaling</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Lighting System</h3>
+            <p>Advanced lighting setup with multiple components:</p>
+            <pre><code>
+float lightPos[] = { -2.0f, 3.0f, 4.0f, 1.0f };
+float lightAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };    
+float lightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };    
+float lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };   
+
+glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0f);
+glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.02f);
+glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.002f);
+            </code></pre>
+            <p>Features:</p>
+            <ul>
+                <li>Dynamic light position that moves with camera</li>
+                <li>Low ambient (0.1) for darker shadows</li>
+                <li>Full intensity diffuse and specular</li>
+                <li>Realistic light attenuation</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Material System</h3>
+            <p>Per-face material properties for enhanced lighting:</p>
+            <pre><code>
+float frontDiffuse[] = { 0.0f, 0.0f, 1.0f, 1.0f };   
+float frontAmbient[] = { 0.0f, 0.0f, 0.1f, 1.0f };   
+
+float matSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+float matShininess[] = { 50.0f };  
+            </code></pre>
+            <p>Features:</p>
+            <ul>
+                <li>Separate ambient and diffuse colors for better contrast</li>
+                <li>White specular highlights</li>
+                <li>Moderate shininess for natural look</li>
+                <li>Per-face color control</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Main Rendering Loop</h3>
+            <p>Core rendering process with modern OpenGL features:</p>
+            <pre><code>
+glEnable(GL_DEPTH_TEST);
+glEnable(GL_LIGHTING);
+glEnable(GL_LIGHT0);
+glEnable(GL_COLOR_MATERIAL);
+glEnable(GL_NORMALIZE);
+glShadeModel(GL_SMOOTH);
+glEnable(GL_LINE_SMOOTH);
+glEnable(GL_BLEND);
+
+while (!glfwWindowShouldClose(window)) {
+    processInput(window);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    updateCamera();
+    drawGround();
+    drawPyramid(-1.0f, 0.0f, 0.0f);
+    drawCube(1.0f, 0.0f, 0.0f);
+    
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+            </code></pre>
+            <p>Features:</p>
+            <ul>
+                <li>Depth testing for proper 3D rendering</li>
+                <li>Smooth shading for better lighting</li>
+                <li>Anti-aliased lines</li>
+                <li>Alpha blending for transparency</li>
+                <li>Double buffering for smooth animation</li>
+            </ul>
+        </div>
+
+        <div class="function">
+            <h3>Input Handling</h3>
+            <p>Comprehensive input system for camera control:</p>
+            <pre><code>
+void processInput(GLFWwindow* window) {
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraRadius -= 0.1f;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraRadius += 0.1f;
+
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        cameraHeight += 0.1f;
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        cameraHeight -= 0.1f;
+}
+            </code></pre>
+            <p>Features:</p>
+            <ul>
+                <li>WASD keys for camera movement</li>
+                <li>Q/E for height adjustment</li>
+                <li>Mouse for camera rotation</li>
+                <li>Automatic constraint handling</li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

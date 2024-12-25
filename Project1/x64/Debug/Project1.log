@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(21,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(22,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(26,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(27,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(28,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(29,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(43,29): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(76,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(435,5): error C2144: syntax error: 'float' should be preceded by ';'
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(466,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Windows 10 PRO\Desktop\KANITA_OPENGL\main.cpp(467,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
