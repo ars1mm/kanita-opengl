@@ -431,7 +431,7 @@ int main() {
     
     glClearColor(0.1f, 0.1f, 0.15f, 1.0f);  
 
-    float lightPos[] = { -2.0f, 3.0f, 4.0f, 1.0f };9
+    float lightPos[] = { -2.0f, 3.0f, 4.0f, 1.0f };
     float lightAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };    
     float lightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };    
     float lightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
